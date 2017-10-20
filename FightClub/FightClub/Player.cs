@@ -21,7 +21,7 @@ namespace FightClub
         private void getDamage(int amount)
         {
             Hp -= amount;
-            if (Hp < 0) Lose();
+            if (Hp <= 0) Lose();
         }
         
         public void getHit(BodyPart attack)

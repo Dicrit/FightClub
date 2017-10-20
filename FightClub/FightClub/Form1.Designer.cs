@@ -35,6 +35,8 @@
             this.player1progress = new System.Windows.Forms.ProgressBar();
             this.player2progress = new System.Windows.Forms.ProgressBar();
             this.player2name = new System.Windows.Forms.Label();
+            this.state = new System.Windows.Forms.Label();
+            this.logger = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // player1name
@@ -102,11 +104,31 @@
             this.player2name.TabIndex = 0;
             this.player2name.Text = "player2";
             // 
+            // state
+            // 
+            this.state.AutoSize = true;
+            this.state.Location = new System.Drawing.Point(212, 111);
+            this.state.Name = "state";
+            this.state.Size = new System.Drawing.Size(41, 13);
+            this.state.TabIndex = 6;
+            this.state.Text = "Atttack";
+            // 
+            // logger
+            // 
+            this.logger.FormattingEnabled = true;
+            this.logger.Location = new System.Drawing.Point(71, 304);
+            this.logger.Name = "logger";
+            this.logger.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.logger.Size = new System.Drawing.Size(391, 95);
+            this.logger.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 420);
+            this.Controls.Add(this.logger);
+            this.Controls.Add(this.state);
             this.Controls.Add(this.player2progress);
             this.Controls.Add(this.player1progress);
             this.Controls.Add(this.button3);
@@ -130,6 +152,8 @@
         private System.Windows.Forms.ProgressBar player1progress;
         private System.Windows.Forms.ProgressBar player2progress;
         private System.Windows.Forms.Label player2name;
+        private System.Windows.Forms.Label state;
+        private System.Windows.Forms.ListBox logger;
     }
 }
 
