@@ -21,7 +21,6 @@ namespace FightClub
         private void getDamage(int amount)
         {
             Hp -= amount;
-            if (Hp <= 0) Lose();
         }
         
         public void getHit(BodyPart attack)
@@ -31,9 +30,11 @@ namespace FightClub
                 Block(name, Hp);
                 return;
             }
-            if (attack == BodyPart.Head) getDamage(20);
+            if (attack == BodyPart.Head) getDamage(15); //You get more damage to head
+            else if (attack == BodyPart.Torso) getDamage(12);
             else getDamage(10);
             Wound(name, Hp);
+            if (Hp <= 0) Lose();
         }
 
 

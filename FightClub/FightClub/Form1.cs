@@ -35,14 +35,35 @@ namespace FightClub
             player2 = new Player();
             player2.Block += block;
             player2.Wound += wound;
-            player1.name = "player";
+            //player1.name = "player";
             player2.name = "computer";
             player1progress.Value = player1.Hp;
             player2progress.Value = player2.Hp;
-            player1.Lose += () => { MessageBox.Show("You've lost"); };
-            player2.Lose += () => { MessageBox.Show("You win!!!!!"); };
-            //logger.ControlAdded += (o,e) => { logger.TopIndex = logger.Controls.Count - 1; };
+            player1.Lose += restart;
+            player2.Lose += restart;
+            player1.name = Prompt.ShowDialog("Please, enter your name", "Hello!");
+            player1name.Text = player1.name;
+            player2name.Text = player2.name;
         }
+        private void restart()
+        {
+            if (MessageBox.Show("You " + (player1turn ? "Win!" : "Lost :(") + " Do you want to restart?", "Restart", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                player1.Hp = 100;
+                player2.Hp = 100;
+                player1progress.Value = player1.Hp;
+                player2progress.Value = player2.Hp;
+                player1name.Text = player1.name;
+                player2name.Text = player2.name;
+                logger.Items.Clear();
+                //player1turn = true;
+            }
+            else
+            {
+                Application.Exit();
+            }
+        }
+
 
         void block(string name, int Hp)
         {
@@ -53,12 +74,11 @@ namespace FightClub
         }
         void log(string str)
         {
-            logger.TopIndex =
-            logger.Items.Add(str);
-
+            logger.TopIndex = logger.Items.Add(str); //Add element and scroll to it
         }
         void wound(string name, int Hp)
         {
+            if (Hp < 0) Hp = 0; //Prevent Progress bar error when value < 0.
             if (player1turn)
             {
                 player2name.Text = name + ":" + Hp;
@@ -93,9 +113,8 @@ namespace FightClub
             }
             else playerSetBlock(player1, part);
             player1turn = !player1turn;
-            //MessageBox.Show();
         }
-        void playerSetBlock(Player player, BodyPart b)
+        void playerSetBlock(Player player, BodyPart b) //Player blocks hit
         {
             player1.Blocked = b;
             player1.getHit(getBotChoise());
@@ -106,7 +125,7 @@ namespace FightClub
             player2.Blocked = getBotChoise();
             player2.getHit(b);
         }
-        private BodyPart getBotChoise()
+        private BodyPart getBotChoise()   //Randomize bot's choise of which part to block/hit
         {
             Random r = new Random();
             int val = r.Next(3);
