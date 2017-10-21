@@ -39,8 +39,8 @@ namespace FightClub
             player2.name = "computer";
             player1progress.Value = player1.Hp;
             player2progress.Value = player2.Hp;
-            player1.Lose += restart;
-            player2.Lose += restart;
+            player1.Death += restart;
+            player2.Death += restart;
             player1.name = Prompt.ShowDialog("Please, enter your name", "Hello!");
             player1name.Text = player1.name;
             player2name.Text = player2.name;

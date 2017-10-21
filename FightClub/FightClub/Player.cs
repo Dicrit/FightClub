@@ -12,11 +12,11 @@ namespace FightClub
         public BodyPart Blocked;
         public int Hp = 100;
         public event Action<string, int> Block, Wound;
-        public event Action Lose;
+        public event Action Death;
         public Player()
         {
             name = "";
-            Lose = () => { };
+            Death = () => { };
         }
         private void getDamage(int amount)
         {
@@ -34,7 +34,7 @@ namespace FightClub
             else if (attack == BodyPart.Torso) getDamage(12);
             else getDamage(10);
             Wound(name, Hp);
-            if (Hp <= 0) Lose();
+            if (Hp <= 0) Death();
         }
 
 
