@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace FightClub
 {
-    public partial class Form1 : Form
+    public partial class FightClub : Form
     {
         private Player player1, player2;
         private bool _turn = true;
@@ -34,10 +34,9 @@ namespace FightClub
             player.Death += restart;
             return player;
         }
-        public Form1()
+        public FightClub()
         {
             InitializeComponent();
-            //EventHandler
             string name = Prompt.ShowDialog("Please, enter your name", "Hello!");
             player1 = InitializePlayer(name);
             player2 = InitializePlayer("computer");
@@ -65,8 +64,9 @@ namespace FightClub
         }
 
 
-        void block(string name, int Hp)
+        void block(object sender, PlayerActionsEventArgs args)
         {
+            int Hp = args.hp;
             if (player1turn)
                 log(player2.name + " has blocked hit, remaining hp: " + Hp);
             else
@@ -76,18 +76,19 @@ namespace FightClub
         {
             logger.TopIndex = logger.Items.Add(str); //Add element and scroll to it
         }
-        void wound(string name, int Hp)
+        void wound(object sender, PlayerActionsEventArgs args)
         {
+            int Hp = args.hp;
             if (Hp < 0) Hp = 0; //Prevent Progress bar error when value < 0.
             if (player1turn)
             {
-                player2name.Text = name + ":" + Hp;
+                player2name.Text = args.name + ":" + Hp;
                 player2progress.Value = Hp;
                 log(player2.name + " has been wounded, remaining hp: " + Hp);
             }
             else
             {
-                player1name.Text = name + ":" + Hp;
+                player1name.Text = args.name + ":" + Hp;
                 player1progress.Value = Hp;
                 log(player1.name + " has been wounded, remaining hp: " + Hp);
             }

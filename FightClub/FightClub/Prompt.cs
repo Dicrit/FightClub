@@ -7,7 +7,17 @@ using System.Threading.Tasks;
 
 namespace FightClub
 {
-    public static class Prompt
+    class PlayerActionsEventArgs : EventArgs
+    {
+        public readonly int hp;
+        public readonly string name;
+        public PlayerActionsEventArgs(int Hp, string Name)
+        {
+            hp = Hp;
+            name = Name;
+        }
+    }
+    static class Prompt
     {
         public static string ShowDialog(string text, string caption)
         {

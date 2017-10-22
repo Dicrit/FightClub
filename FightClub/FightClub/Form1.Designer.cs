@@ -1,6 +1,6 @@
 ﻿namespace FightClub
 {
-    partial class Form1
+    partial class FightClub
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.player1name = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.HeadButton = new System.Windows.Forms.Button();
+            this.TorsoButton = new System.Windows.Forms.Button();
+            this.LegsButton = new System.Windows.Forms.Button();
             this.player1progress = new System.Windows.Forms.ProgressBar();
             this.player2progress = new System.Windows.Forms.ProgressBar();
             this.player2name = new System.Windows.Forms.Label();
@@ -48,38 +48,38 @@
             this.player1name.TabIndex = 0;
             this.player1name.Text = "player1";
             // 
-            // button1
+            // HeadButton
             // 
-            this.button1.Location = new System.Drawing.Point(71, 155);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Tag = "Head";
-            this.button1.Text = "head";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Player1setPart);
+            this.HeadButton.Location = new System.Drawing.Point(71, 155);
+            this.HeadButton.Name = "HeadButton";
+            this.HeadButton.Size = new System.Drawing.Size(75, 23);
+            this.HeadButton.TabIndex = 1;
+            this.HeadButton.Tag = "Head";
+            this.HeadButton.Text = "head";
+            this.HeadButton.UseVisualStyleBackColor = true;
+            this.HeadButton.Click += new System.EventHandler(this.Player1setPart);
             // 
-            // button2
+            // TorsoButton
             // 
-            this.button2.Location = new System.Drawing.Point(71, 208);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Tag = "Torso";
-            this.button2.Text = "torso";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Player1setPart);
+            this.TorsoButton.Location = new System.Drawing.Point(71, 208);
+            this.TorsoButton.Name = "TorsoButton";
+            this.TorsoButton.Size = new System.Drawing.Size(75, 23);
+            this.TorsoButton.TabIndex = 2;
+            this.TorsoButton.Tag = "Torso";
+            this.TorsoButton.Text = "torso";
+            this.TorsoButton.UseVisualStyleBackColor = true;
+            this.TorsoButton.Click += new System.EventHandler(this.Player1setPart);
             // 
-            // button3
+            // LegsButton
             // 
-            this.button3.Location = new System.Drawing.Point(71, 259);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Tag = "Legs";
-            this.button3.Text = "legs";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Player1setPart);
+            this.LegsButton.Location = new System.Drawing.Point(71, 259);
+            this.LegsButton.Name = "LegsButton";
+            this.LegsButton.Size = new System.Drawing.Size(75, 23);
+            this.LegsButton.TabIndex = 3;
+            this.LegsButton.Tag = "Legs";
+            this.LegsButton.Text = "legs";
+            this.LegsButton.UseVisualStyleBackColor = true;
+            this.LegsButton.Click += new System.EventHandler(this.Player1setPart);
             // 
             // player1progress
             // 
@@ -122,7 +122,7 @@
             this.logger.Size = new System.Drawing.Size(391, 95);
             this.logger.TabIndex = 7;
             // 
-            // Form1
+            // FightClub
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -132,13 +132,13 @@
             this.Controls.Add(this.state);
             this.Controls.Add(this.player2progress);
             this.Controls.Add(this.player1progress);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LegsButton);
+            this.Controls.Add(this.TorsoButton);
+            this.Controls.Add(this.HeadButton);
             this.Controls.Add(this.player2name);
             this.Controls.Add(this.player1name);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "FightClub";
+            this.Text = "FightClub";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,9 +147,9 @@
         #endregion
 
         private System.Windows.Forms.Label player1name;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button HeadButton;
+        private System.Windows.Forms.Button TorsoButton;
+        private System.Windows.Forms.Button LegsButton;
         private System.Windows.Forms.ProgressBar player1progress;
         private System.Windows.Forms.ProgressBar player2progress;
         private System.Windows.Forms.Label player2name;

@@ -17,11 +17,12 @@ namespace FightClub
             { return hp; }
         }
 
-        public event Action<string, int> Block, Wound;
+        public event EventHandler<PlayerActionsEventArgs> Block, Wound;
         public event Action Death;
         public Player(string name)
         {
             this.name = name;
+            hp = 100;
         }
         private void getDamage(int amount)
         {
@@ -33,14 +34,14 @@ namespace FightClub
             if (attack == Blocked)
             {
                 if (Block != null)
-                    Block(name, Hp);
+                    Block(this, new PlayerActionsEventArgs(Hp, name));
                 return;
             }
             if (attack == BodyPart.Head) getDamage(15);
             else if (attack == BodyPart.Torso) getDamage(12);
             else getDamage(10);
             if (Wound != null)
-                Wound(name, Hp);
+                Wound(this, new PlayerActionsEventArgs(Hp, name));
             if (Hp <= 0 && Death != null) Death();
         }
 
