@@ -8,36 +8,46 @@ namespace FightClub
 {
     class Player
     {
-        public string name;
+        public readonly string name;
         public BodyPart Blocked;
-        public int Hp = 100;
+        private int hp;
+        public int Hp
+        {
+            get
+            { return hp; }
+        }
+
         public event Action<string, int> Block, Wound;
         public event Action Death;
-        public Player()
+        public Player(string name)
         {
-            name = "";
-            Death = () => { };
+            this.name = name;
         }
         private void getDamage(int amount)
         {
-            Hp -= amount;
+            hp -= amount;
         }
-        
+
         public void getHit(BodyPart attack)
         {
             if (attack == Blocked)
             {
-                Block(name, Hp);
+                if (Block != null)
+                    Block(name, Hp);
                 return;
             }
-            if (attack == BodyPart.Head) getDamage(15); //You get more damage to head
+            if (attack == BodyPart.Head) getDamage(15);
             else if (attack == BodyPart.Torso) getDamage(12);
             else getDamage(10);
-            Wound(name, Hp);
-            if (Hp <= 0) Death();
+            if (Wound != null)
+                Wound(name, Hp);
+            if (Hp <= 0 && Death != null) Death();
         }
 
-
+        public void Reincornate()
+        {
+            hp = 100;
+        }
     }
     enum BodyPart
     {

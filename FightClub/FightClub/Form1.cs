@@ -26,22 +26,23 @@ namespace FightClub
                 _turn = value;
             }
         }
+        Player InitializePlayer(string name)
+        {
+            Player player = new Player(name);
+            player.Block += block;
+            player.Wound += wound;
+            player.Death += restart;
+            return player;
+        }
         public Form1()
         {
             InitializeComponent();
-            player1 = new Player();
-            player1.Block += block;
-            player1.Wound += wound;
-            player2 = new Player();
-            player2.Block += block;
-            player2.Wound += wound;
-            //player1.name = "player";
-            player2.name = "computer";
+            //EventHandler
+            string name = Prompt.ShowDialog("Please, enter your name", "Hello!");
+            player1 = InitializePlayer(name);
+            player2 = InitializePlayer("computer");
             player1progress.Value = player1.Hp;
             player2progress.Value = player2.Hp;
-            player1.Death += restart;
-            player2.Death += restart;
-            player1.name = Prompt.ShowDialog("Please, enter your name", "Hello!");
             player1name.Text = player1.name;
             player2name.Text = player2.name;
         }
@@ -49,14 +50,13 @@ namespace FightClub
         {
             if (MessageBox.Show("You " + (player1turn ? "Win!" : "Lost :(") + " Do you want to restart?", "Restart", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                player1.Hp = 100;
-                player2.Hp = 100;
+                player1.Reincornate();
+                player2.Reincornate();
                 player1progress.Value = player1.Hp;
                 player2progress.Value = player2.Hp;
                 player1name.Text = player1.name;
                 player2name.Text = player2.name;
                 logger.Items.Clear();
-                //player1turn = true;
             }
             else
             {
