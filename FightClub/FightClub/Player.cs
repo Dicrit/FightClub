@@ -9,14 +9,17 @@ namespace FightClub
     class Player
     {
         public readonly string name;
-        public BodyPart Blocked;
+        private BodyPart Blocked;
         private int hp;
         public int Hp
         {
             get
             { return hp; }
         }
-
+        public void setBlock(BodyPart b)
+        {
+            Blocked = b;
+        }
         public event EventHandler<PlayerActionsEventArgs> Block, Wound;
         public event Action Death;
         public Player(string name)

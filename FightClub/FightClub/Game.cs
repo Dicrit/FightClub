@@ -42,13 +42,13 @@ namespace FightClub
 
         void playerSetBlock(BodyPart b) //Player blocks hit
         {
-            player1.Blocked = b;
+            player1.setBlock(b);
             player1.getHit(getBotChoise());
         }
 
         void playerSetAttack(BodyPart b)
         {
-            player2.Blocked = getBotChoise();
+            player2.setBlock(getBotChoise());
             player2.getHit(b);
         }
         private BodyPart getBotChoise()   //Randomize bot's choise of which part to block/hit
@@ -57,10 +57,5 @@ namespace FightClub
             int val = r.Next(3);
             return (BodyPart)val;
         }
-
-
-
-
-
     }
 }
