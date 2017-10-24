@@ -29,7 +29,7 @@ namespace FightClub
         {
             player1.Reincornate();
             player2.Reincornate();
-            playerAttacks = true;
+            playerAttacks = false;
         }
         public void setPlayersAction(BodyPart part)
         {
