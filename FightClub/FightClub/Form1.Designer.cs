@@ -50,7 +50,7 @@
             // 
             // HeadButton
             // 
-            this.HeadButton.Location = new System.Drawing.Point(71, 155);
+            this.HeadButton.Location = new System.Drawing.Point(195, 150);
             this.HeadButton.Name = "HeadButton";
             this.HeadButton.Size = new System.Drawing.Size(75, 23);
             this.HeadButton.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // TorsoButton
             // 
-            this.TorsoButton.Location = new System.Drawing.Point(71, 208);
+            this.TorsoButton.Location = new System.Drawing.Point(195, 200);
             this.TorsoButton.Name = "TorsoButton";
             this.TorsoButton.Size = new System.Drawing.Size(75, 23);
             this.TorsoButton.TabIndex = 2;
@@ -72,7 +72,7 @@
             // 
             // LegsButton
             // 
-            this.LegsButton.Location = new System.Drawing.Point(71, 259);
+            this.LegsButton.Location = new System.Drawing.Point(195, 253);
             this.LegsButton.Name = "LegsButton";
             this.LegsButton.Size = new System.Drawing.Size(75, 23);
             this.LegsButton.TabIndex = 3;

@@ -12,20 +12,9 @@ namespace FightClub
 {
     public partial class FightClub : Form
     {
-        private Player player1, player2;
-        private bool _turn = true;
-        private bool player1turn
-        {
-            get
-            {
-                return _turn;
-            }
-            set
-            {
-                state.Text = value ? "Attack" : "Block";
-                _turn = value;
-            }
-        }
+
+
+        Game game;
         Player InitializePlayer(string name)
         {
             Player player = new Player(name);
@@ -34,65 +23,78 @@ namespace FightClub
             player.Death += restart;
             return player;
         }
+
+        private void setUpControls()
+        {
+            player1progress.Value = 100;
+            player2progress.Value = 100;
+            player1name.Text = game.player1.name;
+            player2name.Text = game.player2.name;
+            logger.Items.Clear();
+        }
+
         public FightClub()
         {
             InitializeComponent();
             string name = Prompt.ShowDialog("Please, enter your name", "Hello!");
-            player1 = InitializePlayer(name);
-            player2 = InitializePlayer("computer");
-            player1progress.Value = player1.Hp;
-            player2progress.Value = player2.Hp;
-            player1name.Text = player1.name;
-            player2name.Text = player2.name;
+            game = new Game(InitializePlayer(name), InitializePlayer("computer"));
+            setUpControls();
         }
+
+
         private void restart()
         {
-            if (MessageBox.Show("You " + (player1turn ? "Win!" : "Lost :(") + " Do you want to restart?", "Restart", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            bool win = game.state == "Attack";
+            if (MessageBox.Show("You " + (win ? "Win!" : "Lost :(") + " Do you want to restart?", "Restart", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                player1.Reincornate();
-                player2.Reincornate();
-                player1progress.Value = player1.Hp;
-                player2progress.Value = player2.Hp;
-                player1name.Text = player1.name;
-                player2name.Text = player2.name;
-                logger.Items.Clear();
+                game.Restart();
+                setUpControls();
             }
             else
             {
+                unsubscribe(game.player1);
+                unsubscribe(game.player2);
                 Application.Exit();
             }
         }
 
-
-        void block(object sender, PlayerActionsEventArgs args)
+        void unsubscribe(Player player)
         {
-            int Hp = args.hp;
-            if (player1turn)
-                log(player2.name + " has blocked hit, remaining hp: " + Hp);
-            else
-                log(player1.name + " has blocked hit, remaining hp: " + Hp);
+            player.Block -= block;
+            player.Wound -= wound;
+            player.Death -= restart;
         }
+
         void log(string str)
         {
             logger.TopIndex = logger.Items.Add(str); //Add element and scroll to it
         }
+
+
+
+        void block(object sender, PlayerActionsEventArgs args)
+        {
+            Player player = sender as Player;
+            int Hp = args.hp;
+            log(player.name + " has blocked hit, remaining hp: " + Hp);
+        }
+
         void wound(object sender, PlayerActionsEventArgs args)
         {
+            Player player = sender as Player;
             int Hp = args.hp;
             if (Hp < 0) Hp = 0; //Prevent Progress bar error when value < 0.
-            if (player1turn)
-            {
-                player2name.Text = args.name + ":" + Hp;
-                player2progress.Value = Hp;
-                log(player2.name + " has been wounded, remaining hp: " + Hp);
-            }
-            else
+            if (sender == game.player1)
             {
                 player1name.Text = args.name + ":" + Hp;
                 player1progress.Value = Hp;
-                log(player1.name + " has been wounded, remaining hp: " + Hp);
             }
-
+            else
+            {
+                player2name.Text = args.name + ":" + Hp;
+                player2progress.Value = Hp;
+            }
+            log(player.name + " has been wounded, remaining hp: " + Hp);
         }
 
 
@@ -108,30 +110,8 @@ namespace FightClub
                     part = BodyPart.Legs;
                     break;
             }
-            if (player1turn)
-            {
-                playerSetAttack(player1, part);
-            }
-            else playerSetBlock(player1, part);
-            player1turn = !player1turn;
+            game.setPlayersAction(part);
+            state.Text = game.state;
         }
-        void playerSetBlock(Player player, BodyPart b) //Player blocks hit
-        {
-            player1.Blocked = b;
-            player1.getHit(getBotChoise());
-        }
-
-        void playerSetAttack(Player plyer, BodyPart b)
-        {
-            player2.Blocked = getBotChoise();
-            player2.getHit(b);
-        }
-        private BodyPart getBotChoise()   //Randomize bot's choise of which part to block/hit
-        {
-            Random r = new Random();
-            int val = r.Next(3);
-            return (BodyPart)val;
-        }
-
     }
 }
