@@ -52,12 +52,16 @@ namespace FightClub
             }
             else
             {
-                unsubscribe(game.player1);
-                unsubscribe(game.player2);
-                Application.Exit();
+                EndGame();
             }
         }
+        void EndGame()
+        {
+            unsubscribe(game.player1);
+            unsubscribe(game.player2);
 
+            Application.Exit();
+        }
         void unsubscribe(Player player)
         {
             player.Block -= block;
